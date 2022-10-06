@@ -8,23 +8,23 @@ public class MyStack<E> {
     Node<E> last;
 
     public void push(E value){
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<E>(l, value, null);
+        final Node<E> lastNode = last;
+        final Node<E> newNode = new Node<E>(lastNode, value, null);
         last = newNode;
-        if (l == null)
+        if (lastNode == null)
             first = newNode;
         else
-            l.setNext(newNode);
+            lastNode.setNext(newNode);
         size++;
     }
 
     public void remove(int index){
         if(index<size && index>=0) {
-            Node<E> x = first;
+            Node<E> currentNode = first;
             for(int i = 0; i < index; i++){
-                x = x.getNext();
+                currentNode = currentNode.getNext();
             }
-            x.unlink();
+            currentNode.unlink();
             size--;
         }
         else System.out.println("Wrong index.");
@@ -51,16 +51,16 @@ public class MyStack<E> {
     }
 
     public E poll(){
-        Node<E> x = first;
+        Node<E> firstNode = first;
         size--;
-        return unlinkFirst(x);
+        return unlinkFirst(firstNode);
     }
 
-    private E unlinkFirst(Node<E> f) {
-        final E element = f.getItem();
-        final Node<E> next = f.getNext();
-        f.setItem(null);
-        f.setNext(null);
+    private E unlinkFirst(Node<E> firstNode) {
+        final E element = firstNode.getItem();
+        final Node<E> next = firstNode.getNext();
+        firstNode.setItem(null);
+        firstNode.setNext(null);
         first = next;
         if (next == null)
             last = null;
