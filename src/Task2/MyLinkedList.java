@@ -20,11 +20,11 @@ public class MyLinkedList<E> {
 
     public void remove(int index){
         if(index<size && index>=0) {
-            Node<E> x = first;
+            Node<E> currentNode = first;
             for(int i = 0; i < index; i++){
-                x = x.getNext();
+                currentNode = currentNode.getNext();
             }
-            x.unlink();
+            currentNode.unlink();
             size--;
         }
         else System.out.println("Wrong index.");
@@ -47,11 +47,11 @@ public class MyLinkedList<E> {
 
     public E get(int index){
         if(index<size && index >= 0) {
-            Node<E> x = first;
+            Node<E> currentNode = first;
             for(int i = 0; i < index; i++){
-                x = x.getNext();
+                currentNode = currentNode.getNext();
             }
-            return x.getItem();
+            return currentNode.getItem();
         }
         return null;
     }
