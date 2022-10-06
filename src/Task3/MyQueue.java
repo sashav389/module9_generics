@@ -9,13 +9,13 @@ public class MyQueue<E> {
     Node<E> last;
 
     public void add(E value){
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<E>(l, value, null);
+        final Node<E> lastNode = last;
+        final Node<E> newNode = new Node<E>(lastNode, value, null);
         last = newNode;
-        if (l == null)
+        if (lastNode == null)
             first = newNode;
         else
-            l.setNext(newNode);
+            lastNode.setNext(newNode);
         size++;
     }
 
@@ -32,12 +32,12 @@ public class MyQueue<E> {
     }
 
     public void clear(){
-        for (Node<E> x = first; x != null; ) {
-            Node<E> next = x.getNext();
-            x.setItem(null);
-            x.setNext(null);
-            x.setPrev(null);
-            x = next;
+        for (Node<E> currentNode = first; currentNode != null; ) {
+            Node<E> nextNode = currentNode.getNext();
+            currentNode.setItem(null);
+            currentNode.setNext(null);
+            currentNode.setPrev(null);
+            currentNode = nextNode;
         }
         first = last = null;
         size = 0;
@@ -52,15 +52,15 @@ public class MyQueue<E> {
     }
 
     public E poll(){
-        Node<E> x = first;
-        return unlinkFirst(x);
+        Node<E> firstNode = first;
+        return unlinkFirst(firstNode);
     }
 
-    private E unlinkFirst(Node<E> f) {
-        final E element = f.getItem();
-        final Node<E> next = f.getNext();
-        f.setItem(null);
-        f.setNext(null);
+    private E unlinkFirst(Node<E> firstNode) {
+        final E element = firstNode.getItem();
+        final Node<E> next = firstNode.getNext();
+        firstNode.setItem(null);
+        firstNode.setNext(null);
         first = next;
         if (next == null)
             last = null;
